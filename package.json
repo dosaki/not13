@@ -1,0 +1,21 @@
+{
+  "name": "not13",
+  "type": "module",
+  "main": "./src/game.js",
+  "version": "1.0.0",
+  "description": "A puzzle game in which you must swipe numbers but avoid the number 13!",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "game"
+  ],
+  "author": "Tiago Correia",
+  "dependencies": {
+    "roadroller": "^2.1.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.51.1",
+    "webpack-cli": "^5.1.4"
+  }
+}
