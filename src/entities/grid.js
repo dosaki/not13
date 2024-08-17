@@ -17,12 +17,12 @@ export class Grid {
 
     getRow(y) {
         // A row is all the squares with the same y
-        return this.squares.filter(s => s.y === y);
+        return this.squares.filter(s => s.y === y).sort(s => s.y);
     }
 
     getColumn(x) {
         // A column is all the squares with the same x
-        return this.squares.filter(s => s.x === x);
+        return this.squares.filter(s => s.x === x).sort(s => s.x);
     }
 
     get rows() {
