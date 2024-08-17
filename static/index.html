@@ -10,35 +10,54 @@
             margin: 0;
             padding: 0;
         }
+
         html,
         body {
             font-family: monospace;
             height: 100%;
             width: 100%;
         }
+
         [g] {
             background: black;
             width: 650px;
             height: 650px;
         }
+
         [s] {
             position: absolute;
-            background: gray;
-            border: 1px solid;
+            border: 1px solid transparent;
             width: 49px;
             height: 49px;
+            border-radius: 10px;
+
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2em;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            top: 0px;
-            left: 0px;
+
+            font-size: 1em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+
+            transition: all 0.4s ease;
+
+            box-shadow: inset 3px -5px 10px 4px rgba(0, 0, 0, 0.5);
+            transform: scale(0);
         }
-        [s]:hover {
-            border: 1px solid white;
-            border-radius: 8px;
+
+        .appear {
+            transform: scale(1.5);
+        }
+        .normal {
+            transform: scale(1);
+        }
+
+        .bump-x {
+            transform: scale(0.7, 1.2);
+        }
+        .bump-y {
+            transform: scale(1.2, 0.7);
         }
     </style>
 </head>
