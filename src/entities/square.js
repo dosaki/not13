@@ -11,9 +11,11 @@ export class Square {
     }
     set number(value) {
         this._number = value;
-        if (this._ref) {
-            this._ref.innerHTML = `${value}`;
-        }
+        setTimeout(() => {
+            if (this._ref) {
+                this._ref.innerHTML = `${value}`;
+            }
+        }, 300);
     }
 
     merge(square) {
@@ -27,9 +29,9 @@ export class Square {
 
     disappear() {
         this.number = null;
-        
-        //maybe a setTimeout to wrap the removal (for animation)
-        this._ref.remove();
+        setTimeout(() => {
+            this._ref.remove();
+        }, 300);
     }
 
     div(parent) {

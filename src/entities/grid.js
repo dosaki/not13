@@ -85,6 +85,7 @@ export class Grid {
                 } else {
                     if (lastSquare) {
                         lastSquare.merge(square);
+                        square.y = lastWall + 1;
                     } else {
                         square.y = lastWall + 1;
                         lastSquare = square;
@@ -109,6 +110,7 @@ export class Grid {
                 } else {
                     if (lastSquare) {
                         lastSquare.merge(square);
+                        square.y = lastWall - 1;
                     } else {
                         square.y = lastWall - 1;
                         lastSquare = square;
@@ -133,6 +135,7 @@ export class Grid {
                 } else {
                     if (lastSquare) {
                         lastSquare.merge(square);
+                        square.x = lastWall + 1;
                     } else {
                         square.x = lastWall + 1;
                         lastSquare = square;
@@ -157,6 +160,7 @@ export class Grid {
                 } else {
                     if (lastSquare) {
                         lastSquare.merge(square);
+                        square.x = lastWall - 1;
                     } else {
                         square.x = lastWall - 1;
                         lastSquare = square;
