@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=650, initial-scale=1" />
     <title>¬13</title>
     <style>
         * {
@@ -18,7 +18,15 @@
             width: 100%;
         }
 
+        [c] {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
         [g] {
+            position: relative;
             background: black;
             width: 650px;
             height: 650px;
@@ -27,8 +35,8 @@
         [s] {
             position: absolute;
             border: 1px solid transparent;
-            width: 49px;
-            height: 49px;
+            width: 48px;
+            height: 48px;
             border-radius: 10px;
 
             display: flex;
@@ -49,6 +57,7 @@
         .appear {
             transform: scale(1.5);
         }
+
         .normal {
             transform: scale(1);
         }
@@ -56,6 +65,7 @@
         .bump-x {
             transform: scale(0.7, 1.2);
         }
+
         .bump-y {
             transform: scale(1.2, 0.7);
         }
@@ -63,6 +73,8 @@
 </head>
 
 <body>
-    <div g>
+    <div c>
+        <div g>
+        </div>
     </div>
     <script src=js/main.js></script>

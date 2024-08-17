@@ -23,6 +23,7 @@ quarterImageToFull("/imgs/box_part.png", 50, 50).then((box) => {
 const grid = new Grid(document.querySelector('[g]'), 5);
 grid.reDraw();
 window.grid = grid;
+document.querySelector('[g]').requestFullscreen();
 
 window.addEventListener('keydown', (e) => {
     const key = e.key;
