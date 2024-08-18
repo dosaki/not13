@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=650, initial-scale=1" />
     <title>¬13</title>
     <style>
+        :root {
+            --max: 5;
+            --size: 75px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -16,6 +21,8 @@
             font-family: monospace;
             height: 100%;
             width: 100%;
+            overflow: hidden;
+            overscroll-behavior: none;
         }
 
         [c] {
@@ -23,21 +30,23 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100%;
+            width: 100%;
         }
 
         [g] {
             position: relative;
             background: black;
-            width: 650px;
-            height: 650px;
+            width: calc(var(--max)*var(--size));
+            height: calc(var(--max)*var(--size));
         }
 
         [s] {
             position: absolute;
             border: 1px solid transparent;
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
+            width: calc(var(--size) - 2px);
+            height: calc(var(--size) - 2px);
+            border-radius: 20%;
 
             display: flex;
             justify-content: center;
@@ -52,6 +61,8 @@
 
             box-shadow: inset 3px -5px 10px 4px rgba(0, 0, 0, 0.5);
             transform: scale(0);
+            background-repeat: no-repeat;
+            background-size: cover;
         }
 
         .appear {

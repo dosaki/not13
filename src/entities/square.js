@@ -1,6 +1,6 @@
 const OPERATION = {
-    "+": (a, b) => Math.round(a + b * 10) / 10,
-    "x": (a, b) => Math.round(a * b * 10) / 10
+    "+": (a, b) => Math.round((a + b) * 10) / 10,
+    "x": (a, b) => Math.round((a * b) * 10) / 10
 };
 
 export class Square {
@@ -10,6 +10,11 @@ export class Square {
         this._number = number;
         this._operation = operation || "+";
         this._ref = null;
+    }
+
+
+    get isInt() {
+        return this._number % 1 === 0;
     }
 
     get number() {
@@ -37,13 +42,20 @@ export class Square {
     }
 
     merge(square) {
-        if (this.number === 13 || square.number === 13) {
+        if (this.number === 13 && square.number !== -13) {
             return false;
+        }
+        if (this.number === 13 && square.number === -13) {
+            this.disappear();
+            square.disappear();
+            return true;
         }
         if (this._operation === "x") {
             this.number = OPERATION[this._operation](this.number, square.number);
+        } else if (square._operation === "x") {
+            this.number = OPERATION[square._operation](square.number, this.number);
         } else {
-            this.number = OPERATION[this._operation](square.number, this.number);
+            this.number = OPERATION[this._operation](this.number, square.number);
         }
         this._operation = "+";
         square.disappear();
@@ -76,12 +88,12 @@ export class Square {
             setTimeout(() => {
                 this._ref.classList.remove(`bump-${axis}-${direction}`);
             }, window.ANIMATION_MS);
-        }, ANIMATION_MS*0.8);
+        }, ANIMATION_MS * 0.8);
     }
 
     draw() {
-        this._ref.style.left = `${this.x * 50}px`;
-        this._ref.style.top = `${this.y * 50}px`;
+        this._ref.style.left = `${this.x * 75}px`;
+        this._ref.style.top = `${this.y * 75}px`;
         if (this._number === 13) {
             this._ref.classList.add('w');
             this._ref.classList.remove('n');

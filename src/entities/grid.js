@@ -2,21 +2,27 @@ import { int, pick } from '../utils/random-utils.js';
 import { Square } from './square.js';
 
 
-const MAX_ELEMENTS = 13;
+const MAX_ELEMENTS = 5;
 
 const moveLogic = (list, start, increment, axis) => {
     const direction = increment > 0 ? "normal" : "reverse";
     let lastWall = start;
     let lastSquare = null;
     list.forEach(square => {
-        if (square.number === MAX_ELEMENTS) {
+        if (square.number === 13) {
             lastWall = square[axis];
             lastSquare = null;
         } else {
             if (lastSquare) {
-                lastSquare.merge(square);
-                lastSquare.bump(axis, direction);
-                square[axis] = lastSquare[axis] + increment;
+                if(lastSquare.isInt === square.isInt){
+                    square[axis] = lastSquare[axis] + increment;
+                    lastSquare.merge(square);
+                    lastSquare.bump(axis, direction);
+                } else {
+                    square[axis] = lastSquare[axis] + increment;
+                    lastWall = square[axis];
+                    lastSquare = square;
+                }
             } else {
                 lastSquare = square;
                 square[axis] = lastWall + increment;
@@ -31,19 +37,19 @@ export class Grid {
         this.indexedSquares = {};
         this.element = element;
         [...Array(initialSquares - 3)].forEach(_ => this.newSquare());
-        this.newSquare(MAX_ELEMENTS, "+");
+        this.newSquare(13, "+");
         this.newSquare(int(-12, 12));
         this.newSquare(int(-12, 12));
     }
 
     getRow(y) {
         // A row is all the squares with the same y
-        return this.squares.filter(s => s.y === y).sort((a, b) => a.y - b.y);
+        return this.squares.filter(s => s.y === y).sort((a, b) => a.x - b.x);
     }
 
     getColumn(x) {
         // A column is all the squares with the same x
-        return this.squares.filter(s => s.x === x).sort((a, b) => a.x - b.x);
+        return this.squares.filter(s => s.x === x).sort((a, b) => a.y - b.y);
     }
 
     get rows() {
@@ -60,7 +66,7 @@ export class Grid {
 
     calculateFreePositions(number) {
         // 13 should never be on the edges
-        const adjustment = number === MAX_ELEMENTS ? 1 : 0;
+        const adjustment = number === 13 ? 1 : 0;
         const takenPositions = Object.keys(this.indexedSquares);
         const freePositions = [];
         for (let x = adjustment; x < MAX_ELEMENTS-adjustment; x++) {
@@ -77,11 +83,12 @@ export class Grid {
         if (this.isFull()) {
             return;
         }
-        const newNumber = nr || Math.round(int(-MAX_ELEMENTS, MAX_ELEMENTS) / pick(1, 1, 1, 1, 2, 2, 3) * 10) / 10
+        const newNumber = nr || Math.round((int(-13, 13)||1) / pick(1, 1, 2, 2, 3) * 10) / 10
         const [x, y] = pick(...this.calculateFreePositions(newNumber));
         const s = new Square(x, y,
             newNumber,
-            operator || pick("+", "x")
+            "+",
+            // operator || pick("+", "x")
         ).div(this.element);
         this.squares.push(s);
         this.indexedSquares[`${x}-${y}`] = s;

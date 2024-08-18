@@ -21,9 +21,14 @@ quarterImageToFull("/imgs/box_part.png", 50, 50).then((box) => {
 
 
 const grid = new Grid(document.querySelector('[g]'), 5);
+let isFullScreen = false;
 grid.reDraw();
 window.grid = grid;
-document.querySelector('[g]').requestFullscreen();
+
+document.querySelector('[g]').addEventListener('click', () => {
+    document.querySelector('[g]').requestFullscreen();
+    isFullScreen = true;
+});
 
 window.addEventListener('keydown', (e) => {
     const key = e.key;
@@ -37,3 +42,42 @@ window.addEventListener('keydown', (e) => {
         grid.moveRight();
     }
 });
+
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
+
+let xDown = null;
+let yDown = null;
+
+function handleTouchStart(evt) {
+    const firstTouch = evt.touches[0];
+    xDown = firstTouch.clientX;
+    yDown = firstTouch.clientY;
+};
+
+function handleTouchMove(evt) {
+    if (!xDown || !yDown) {
+        return;
+    }
+
+    const xUp = evt.touches[0].clientX;
+    const yUp = evt.touches[0].clientY;
+    const xDiff = xDown - xUp;
+    const yDiff = yDown - yUp;
+
+    if (Math.abs(xDiff) < Math.abs(yDiff)) {
+        if (yDiff > 0) {
+            grid.moveUp();
+        } else {
+            grid.moveDown();
+        }
+    } else {
+        if (xDiff > 0) {
+            grid.moveLeft();
+        } else {
+            grid.moveRight();
+        }
+    }
+    xDown = null;
+    yDown = null;
+};
