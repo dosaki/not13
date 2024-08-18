@@ -70,11 +70,11 @@ export class Square {
         return this;
     }
 
-    bump(axis) {
+    bump(axis, direction) {
         setTimeout(() => {
-            this._ref.classList.add(`bump-${axis}`);
+            this._ref.classList.add(`bump-${axis}-${direction}`);
             setTimeout(() => {
-                this._ref.classList.remove(`bump-${axis}`);
+                this._ref.classList.remove(`bump-${axis}-${direction}`);
             }, window.ANIMATION_MS);
         }, ANIMATION_MS*0.8);
     }

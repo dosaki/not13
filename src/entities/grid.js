@@ -5,6 +5,7 @@ import { Square } from './square.js';
 const MAX_ELEMENTS = 13;
 
 const moveLogic = (list, start, increment, axis) => {
+    const direction = increment > 0 ? "normal" : "reverse";
     let lastWall = start;
     let lastSquare = null;
     list.forEach(square => {
@@ -14,7 +15,7 @@ const moveLogic = (list, start, increment, axis) => {
         } else {
             if (lastSquare) {
                 lastSquare.merge(square);
-                lastSquare.bump(axis);
+                lastSquare.bump(axis, direction);
                 square[axis] = lastSquare[axis] + increment;
             } else {
                 lastSquare = square;

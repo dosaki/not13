@@ -24,7 +24,7 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         [g] {
             position: relative;
             background: black;
@@ -62,12 +62,24 @@
             transform: scale(1);
         }
 
-        .bump-x {
+        .bump-x-normal {
             transform: scale(0.7, 1.2);
+            transform-origin: center left;
         }
 
-        .bump-y {
+        .bump-x-reverse {
+            transform: scale(0.7, 1.2);
+            transform-origin: center right;
+        }
+
+        .bump-y-normal {
             transform: scale(1.2, 0.7);
+            transform-origin: top center;
+        }
+
+        .bump-y-reverse {
+            transform: scale(1.2, 0.7);
+            transform-origin: bottom center;
         }
     </style>
 </head>
