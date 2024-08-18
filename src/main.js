@@ -19,15 +19,23 @@ quarterImageToFull("/imgs/box_part.png", 50, 50).then((box) => {
     });
 });
 
-
-const grid = new Grid(document.querySelector('[g]'), 5);
+const gridArea = document.querySelector('[g]');
+const containerArea = document.querySelector('[c]');
+const fullscreenButton = document.querySelector('button');
+const grid = new Grid(gridArea, 5);
 let isFullScreen = false;
 grid.reDraw();
 window.grid = grid;
 
-document.querySelector('[g]').addEventListener('click', () => {
-    document.querySelector('[g]').requestFullscreen();
-    isFullScreen = true;
+fullscreenButton.addEventListener('click', () => {
+    if(isFullScreen) {
+        document.exitFullscreen();
+    } else {
+        containerArea.requestFullscreen();
+    }
+    isFullScreen = !isFullScreen;
+    fullscreenButton.innerHTML = isFullScreen ? "Exit Fullscreen" : "Fullscreen";
+
 });
 
 window.addEventListener('keydown', (e) => {
