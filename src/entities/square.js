@@ -27,6 +27,17 @@ export class Square {
             if (this._ref) {
                 this._ref.innerHTML = `${this.value}`;
             }
+            if (this._number === 0) {
+                this._ref.classList.remove('bump-x-normal');
+                this._ref.classList.remove('bump-x-reverse');
+                this._ref.classList.remove('bump-y-normal');
+                this._ref.classList.remove('bump-y-reverse');
+                this._ref.classList.remove('normal');
+                this._ref.classList.add('disappear');
+                setTimeout(() => {
+                    this.disappear();
+                }, window.ANIMATION_MS);
+            }
         }, window.ANIMATION_MS);
     }
 
@@ -46,7 +57,7 @@ export class Square {
             return false;
         }
         if (this.number === 13 && square.number === -13) {
-            this.disappear();
+            this.number = 0;
             square.disappear();
             return true;
         }

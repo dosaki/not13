@@ -11,13 +11,14 @@ const moveLogic = (list, start, increment, axis) => {
     list.forEach(square => {
         if (square.number === 13) {
             lastWall = square[axis];
-            lastSquare = null;
+            lastSquare = square;
         } else {
             if (lastSquare) {
                 if(lastSquare.isInt === square.isInt){
                     square[axis] = lastSquare[axis] + increment;
-                    lastSquare.merge(square);
-                    lastSquare.bump(axis, direction);
+                    if(lastSquare.merge(square)){
+                        lastSquare.bump(axis, direction);
+                    }
                 } else {
                     square[axis] = lastSquare[axis] + increment;
                     lastWall = square[axis];
@@ -38,8 +39,9 @@ export class Grid {
         this.element = element;
         [...Array(initialSquares - 3)].forEach(_ => this.newSquare());
         this.newSquare(13, "+");
-        this.newSquare(int(-12, 12));
-        this.newSquare(int(-12, 12));
+        this.newSquare(13, "+");
+        this.newSquare(-13, "+");
+        this.newSquare(int(-13,13)/2);
     }
 
     getRow(y) {
