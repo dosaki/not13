@@ -77,7 +77,6 @@ export class Square {
         square.disappear();
         if(wasInt !== this.isInt){
             this.doWow();
-            console.log('wow');
         }
         return true;
     }
@@ -100,7 +99,7 @@ export class Square {
             this._ref.classList.remove('appear');
             this._ref.classList.add('normal');
         }, window.ANIMATION_MS);
-        this._ref.square = this;  // @todo: remove this
+        // this._ref.square = this;  // @todo: remove this
         return this;
     }
 

@@ -110,7 +110,6 @@ export class Grid {
     }
 
     moveUp() {
-        console.log("moveUp");
         this.columns.forEach(column => moveLogic(column, -1, 1, "y"));
         this.reDraw();
         this.reIndex();
@@ -120,7 +119,6 @@ export class Grid {
     }
 
     moveDown() {
-        console.log("moveDown");
         this.columns.forEach(column => moveLogic(column.reverse(), MAX_ELEMENTS, -1, "y"));
         this.reDraw();
         this.reIndex();
@@ -130,7 +128,6 @@ export class Grid {
     }
 
     moveLeft() {
-        console.log("moveLeft");
         this.rows.forEach(row => moveLogic(row, -1, 1, "x"));
         this.reDraw();
         this.reIndex();
@@ -140,7 +137,6 @@ export class Grid {
     }
 
     moveRight() {
-        console.log("moveRight");
         this.rows.forEach(row => moveLogic(row.reverse(), MAX_ELEMENTS, -1, "x"));
         this.reDraw();
         this.reIndex();
