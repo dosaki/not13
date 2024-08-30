@@ -38,9 +38,9 @@ export class Grid {
         this.indexedSquares = {};
         this.element = element;
         [...Array(initialSquares - 3)].forEach(_ => this.newSquare());
-        this.newSquare(13, "+");
-        this.newSquare(13, "+");
-        this.newSquare(-13, "+");
+        this.newSquare(13);
+        this.newSquare(13);
+        this.newSquare(-13);
         this.newSquare(int(-13,13)/2);
     }
 
@@ -89,8 +89,7 @@ export class Grid {
         const [x, y] = pick(...this.calculateFreePositions(newNumber));
         const s = new Square(x, y,
             newNumber,
-            "+",
-            // operator || pick("+", "x")
+            null //, operator || pick("+", "x")
         ).div(this.element);
         this.squares.push(s);
         this.indexedSquares[`${x}-${y}`] = s;

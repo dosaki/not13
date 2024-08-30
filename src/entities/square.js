@@ -1,3 +1,5 @@
+import { int, pick } from '../utils/random-utils.js';
+
 const OPERATION = {
     "+": (a, b) => Math.round((a + b) * 10) / 10,
     "x": (a, b) => Math.round((a * b) * 10) / 10
@@ -10,6 +12,7 @@ export class Square {
         this._number = number;
         this._operation = operation || "+";
         this._ref = null;
+        this._parent = null;
     }
 
 
@@ -53,11 +56,13 @@ export class Square {
     }
 
     merge(square) {
+        const wasInt = this.isInt;
         if (this.number === 13 && square.number !== -13) {
             return false;
         }
         if (this.number === 13 && square.number === -13) {
             this.number = 0;
+            this.doWow();
             square.disappear();
             return true;
         }
@@ -70,6 +75,10 @@ export class Square {
         }
         this._operation = "+";
         square.disappear();
+        if(wasInt !== this.isInt){
+            this.doWow();
+            console.log('wow');
+        }
         return true;
     }
 
@@ -86,10 +95,12 @@ export class Square {
         this._ref.classList.add('appear');
         this._ref.innerHTML = `${this.value}`;
         parent.appendChild(this._ref);
+        this._parent = parent;
         setTimeout(() => {
             this._ref.classList.remove('appear');
             this._ref.classList.add('normal');
         }, window.ANIMATION_MS);
+        this._ref.square = this;  // @todo: remove this
         return this;
     }
 
@@ -112,6 +123,28 @@ export class Square {
             this._ref.classList.add('n');
             this._ref.classList.remove('w');
         }
+        return this;
+    }
+
+    doWow() {
+        const wow = document.createElement('div');
+        wow.classList.add('wow');
+        wow.innerHTML = pick("Nice!", "Wow!", "Cool!");
+        this._parent.appendChild(wow);
+        wow.style.left = `${this.x * 75}px`;
+        wow.style.top = `${this.y * 75}px`;
+        wow.style.color = pick("#ff0000", "#0088ff", "#00ff00", "#00ffff", "#ff00ff", "#ffff00");
+        setTimeout(() => {
+            wow.classList.add('popin');
+            setTimeout(() => {
+                wow.classList.remove('popin');
+                wow.classList.add('popout');
+                wow.style.top = `${(this.y * 75) - 75}px`;
+                setTimeout(() => {
+                    wow.remove();
+                }, window.ANIMATION_MS);
+            }, window.ANIMATION_MS);
+        }, 10);
         return this;
     }
 }
