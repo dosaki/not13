@@ -1,4 +1,6 @@
-import { int, pick } from '../utils/random-utils.js';
+import { pick } from '../utils/random-utils.js';
+import { Note } from '../utils/audio-utils.js';
+
 
 const OPERATION = {
     "+": (a, b) => Math.round((a + b) * 10) / 10,
@@ -75,8 +77,13 @@ export class Square {
         }
         this._operation = "+";
         square.disappear();
-        if(wasInt !== this.isInt){
+        if (wasInt !== this.isInt) {
             this.doWow();
+        } else {
+            Note.new("c#", 4, 0.05).play();
+            setTimeout(() => {
+                Note.new("d#", 4, 0.05).play();
+            }, 100);
         }
         return true;
     }
@@ -133,6 +140,16 @@ export class Square {
         wow.style.left = `${this.x * 75}px`;
         wow.style.top = `${this.y * 75}px`;
         wow.style.color = pick("#ff0000", "#0088ff", "#00ff00", "#00ffff", "#ff00ff", "#ffff00");
+        Note.new("c", 4, 0.05).play();
+        setTimeout(() => {
+            Note.new("c", 4, 0.05).play();
+            setTimeout(() => {
+                Note.new("c", 4, 0.05).play();
+                setTimeout(() => {
+                    Note.new("e", 4, 0.05).play();
+                }, 100);
+            }, 100);
+        }, 100);
         setTimeout(() => {
             wow.classList.add('popin');
             setTimeout(() => {
