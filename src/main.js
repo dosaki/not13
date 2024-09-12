@@ -48,15 +48,15 @@ function handleTouchMove(evt) {
 
     if (Math.abs(xDiff) < Math.abs(yDiff)) {
         if (yDiff > 0) {
-            grid.moveUp();
+            GRID.moveUp();
         } else {
-            grid.moveDown();
+            GRID.moveDown();
         }
     } else {
         if (xDiff > 0) {
-            grid.moveLeft();
+            GRID.moveLeft();
         } else {
-            grid.moveRight();
+            GRID.moveRight();
         }
     }
     X_DOWN = null;

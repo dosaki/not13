@@ -50,22 +50,22 @@ export class Grid {
         this.allow = ['left', 'right', 'up', 'down'];
         this.tutorialStages = [
             () => {
-                this.allow = [];
+                this.allow = ["click"];
                 const plus13 = this.squares.find(s => s.number === 13);
-                this.tutorialSpotlightSquare(plus13, 'These "13" squares don\'t move. Tap or click to continue.');
+                this.tutorialSpotlightSquare(plus13, 'These "13" squares don\'t move. Tap or click to continue');
             },
             () => {
-                this.allow = [];
+                this.allow = ["click"];
                 const minus13 = this.squares.find(s => s.number === -13);
-                this.tutorialSpotlightSquare(minus13, '"-13" squares can destroy the "13" squares.');
+                this.tutorialSpotlightSquare(minus13, '"-13" squares can destroy the "13" squares');
             },
             () => {
-                this.allow = [];
+                this.allow = ["click"];
                 const intSquare = this.squares.find(s => s.number !== 13 && s.number !== -13 && s.isInt);
                 this.tutorialSpotlightSquare(intSquare, 'Boxes with integers only merge with other integer boxes');
             },
             () => {
-                this.allow = [];
+                this.allow = ["click"];
                 const floatSquare = this.squares.find(s => !s.isInt);
                 this.tutorialSpotlightSquare(floatSquare, 'Boxes with floats only merge with other float boxes');
             },
@@ -76,7 +76,7 @@ export class Grid {
                     'Swipe right or press the right key to make the "-13" box collide with the "13" box');
             },
             () => {
-                this.allow = [];
+                this.allow = ["click"];
                 this.tutorialSpotlight(
                     {x: 0, y: 0, w: 0, h: 0},
                     'It\'s gone! You win when there are no "13" boxes left!');
@@ -239,7 +239,11 @@ export class Grid {
         this.initSquares();
         this.tutorialElement = this.tutorialCover();
         this.tutorialStages[this.tutorialStage]();
-        this.tutorialElement.addEventListener('click', () => this.doTutorialLogic());
+        this.tutorialElement.addEventListener('click', () => {
+            if (this.allow.includes("click")) {
+                this.doTutorialLogic();
+            }
+        });
     }
 
     doTutorialLogic() {
