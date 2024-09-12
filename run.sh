@@ -20,4 +20,4 @@ if [[ $? -ne 0 ]]; then
     exit 1
 fi
 
-python -m http.server --directory app
+python3 -m http.server --directory app

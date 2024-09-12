@@ -67,6 +67,19 @@
             background-size: cover;
         }
 
+        .tutorial-box {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            font-size: 1em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        }
+
         .appear {
             transform: scale(1.5);
         }
@@ -122,8 +135,8 @@
 
 <body>
     <div c>
-        <div g>
-        </div>
-        <button>Fullscreen</button>
+        <div g></div>
+        <button tutorial>Tutorial</button>
+        <button reset>Reset</button>
     </div>
     <script src=js/main.js></script>
