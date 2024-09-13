@@ -75,9 +75,9 @@ function handleTouchMove(evt) {
     Y_DOWN = null;
 }
 
-quarterImageToFull('/imgs/box_part.png', 50, 50).then((box) => {
+quarterImageToFull('./imgs/box_part.png', 50, 50).then((box) => {
     addBoxStyle('.n', `url(${box})`);
-    quarterImageToFull('/imgs/metal_stud.png', 50, 50).then((metal) => {
+    quarterImageToFull('./imgs/metal_stud.png', 50, 50).then((metal) => {
         addBoxStyle('.w', `url(${metal}), url(${box})`);
         setGameUp(GRID);
         window.addEventListener('keydown', (e) => {

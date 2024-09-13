@@ -14,7 +14,7 @@ Your job is to ensure this warehouse is clear of "13" boxes.
 
 ----
 
-"Not Warehouse 13!" is a puzzle game in which you must swipe to merge boxes until you get rid of all the dreaded boxes labelled with 13.
+"Not Warehouse 13" is a puzzle game in which you must swipe to merge boxes until you get rid of all the dreaded boxes labelled with 13.
 
 ----
 
